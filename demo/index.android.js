@@ -88,7 +88,7 @@ class AwesomeProject extends Component {
 	}
 
 	registerAppId(){
-		QiYu.registerAppId('3858be3c20ceb6298575736cf27858a7', '网易七鱼')
+		QiYu.registerAppId('七鱼管理后台的appKey', '七鱼管理后台的App名称')
 	}
 
 	openServiceWindow(){
