@@ -31,9 +31,11 @@ rnpm info Linking react-native-wx ios dependency
 或者你还可以手动配置
 ```
 打开XCode's工程中, 右键点击Libraries文件夹 ➜ Add Files to <...> b.去node_modules ➜ react-native-qiyu ➜ ios ➜ 选择 RCTQiYu.xcodeproj c.在工程Build Phases ➜ Link Binary With Libraries中添加libRCTQiYu.a
+```
 
 工程配置
-在工程target的Build Phases->Link Binary with Libraries中加入UIKit.framework、CoreText.framework、MobileCoreService.framework、SystemConfiguration.framework、AVFoundation.framwork、CoreTelephony.framework、CoreMedia.framework、AudioToolbox.framework、libz.tbd、libstdc++.6.0.9.tbd、libsqlite3.0.tbd等依赖库
+```
+在工程target的Build Phases->Link Binary with Libraries中加入UIKit.framework、CoreText.framework、MobileCoreService.framework、SystemConfiguration.framework、AVFoundation.framwork、CoreTelephony.framework、CoreMedia.framework、AudioToolbox.framework、libz.tbd、libstdc++.6.0.9.tbd、libsqlite3.0.tbd等依赖库，在Build Phases->Copy Bundle Resources下添加QYResource.bundle资源包。
 ```
 iOS9传输安全问题
 ```
