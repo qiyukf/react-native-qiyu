@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E62D05601E10ED84004AE8BB /* libaacplus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E62D055D1E10ED84004AE8BB /* libaacplus.a */; };
+		E62D05611E10ED84004AE8BB /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E62D055E1E10ED84004AE8BB /* libcrypto.a */; };
+		E62D05621E10ED84004AE8BB /* libevent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E62D055F1E10ED84004AE8BB /* libevent.a */; };
 		E632A24D1D757FCD001BCAE0 /* RCTQiYu.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E632A24C1D757FCD001BCAE0 /* RCTQiYu.h */; };
 		E632A24F1D757FCD001BCAE0 /* RCTQiYu.m in Sources */ = {isa = PBXBuildFile; fileRef = E632A24E1D757FCD001BCAE0 /* RCTQiYu.m */; };
 		E632A2621D758012001BCAE0 /* libQYSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E632A2601D758012001BCAE0 /* libQYSDK.a */; };
@@ -26,6 +29,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E62D055D1E10ED84004AE8BB /* libaacplus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libaacplus.a; sourceTree = "<group>"; };
+		E62D055E1E10ED84004AE8BB /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		E62D055F1E10ED84004AE8BB /* libevent.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libevent.a; sourceTree = "<group>"; };
 		E632A2491D757FCD001BCAE0 /* libRCTQiYu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTQiYu.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E632A24C1D757FCD001BCAE0 /* RCTQiYu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTQiYu.h; sourceTree = "<group>"; };
 		E632A24E1D757FCD001BCAE0 /* RCTQiYu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTQiYu.m; sourceTree = "<group>"; };
@@ -48,6 +54,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E632A2621D758012001BCAE0 /* libQYSDK.a in Frameworks */,
+				E62D05601E10ED84004AE8BB /* libaacplus.a in Frameworks */,
+				E62D05621E10ED84004AE8BB /* libevent.a in Frameworks */,
+				E62D05611E10ED84004AE8BB /* libcrypto.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +94,9 @@
 			children = (
 				E632A2561D758012001BCAE0 /* ExportHeaders */,
 				E632A2601D758012001BCAE0 /* libQYSDK.a */,
+				E62D055D1E10ED84004AE8BB /* libaacplus.a */,
+				E62D055E1E10ED84004AE8BB /* libcrypto.a */,
+				E62D055F1E10ED84004AE8BB /* libevent.a */,
 				E632A2611D758012001BCAE0 /* QYResource.bundle */,
 			);
 			path = QIYU_iOS_SDK;
