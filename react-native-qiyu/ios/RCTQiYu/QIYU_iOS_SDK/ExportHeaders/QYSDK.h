@@ -2,8 +2,10 @@
 //  QYSDK.h
 //  QYSDK
 //
+//  version 3.12.0
+//
 //  Created by towik on 12/21/15.
-//  Copyright (c) 2016 Netease. All rights reserved.
+//  Copyright (c) 2017 Netease. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -14,6 +16,20 @@
  */
 typedef void(^QYCompletionBlock)();
 
+/**
+ *  完成回调
+ */
+typedef void(^QYCompletionWithResultBlock)(BOOL isSuccess);
+
+/**
+ *  推送消息回调
+ */
+typedef void(^QYPushMessageBlock)(QYPushMessage *);
+
+/**
+ *  清理文件缓存回调
+ */
+typedef void(^QYCleanResourceCacheCompleteBlock)(NSError *error);
 
 /**
  *  所有SDK接口都从此类获得
@@ -61,7 +77,7 @@ typedef void(^QYCompletionBlock)();
  *
  *  @return 会话管理类
  */
-- (id<YSFConversationManager>)conversationManager;
+- (QYConversationManager *)conversationManager;
 
 /**
  *  更新推送token
@@ -85,6 +101,34 @@ typedef void(^QYCompletionBlock)();
 - (void)setUserInfo:(QYUserInfo *)userInfo;
 
 /**
+ *  设置authToken
+ *
+ */
+- (void)setAuthToken:(NSString *)authToken;
+
+/**
+ *  设置个人信息，带authToken校验。用户帐号登录成功之后，调用此函数
+ *
+ *  @param userInfo 个人信息
+ *  @param block authToken校验结果的回调
+ */
+- (void)setUserInfo:(QYUserInfo *)userInfo authTokenVerificationResultBlock:(QYCompletionWithResultBlock)block;
+
+/**
+ *  获取推送消息
+ *
+ *  @param messageId 消息id
+ */
+- (void)getPushMessage:(NSString *)messageId;
+
+/**
+ *  注册推送消息通知回调
+ *
+ *  @param block 收到消息的回调
+ */
+- (void)registerPushMessageNotification:(QYPushMessageBlock)block;
+
+/**
  *  返回AppKey
  *
  *  @return appKey
@@ -98,6 +142,22 @@ typedef void(^QYCompletionBlock)();
  *  @param attributes 附加信息
  */
 - (void)trackHistory:(NSString *)urlString withAttributes:(NSDictionary *)attributes;
+
+/**
+ 清理接收文件缓存
+ @param completeBlock 清理缓存完成block
+ */
+- (void)cleanResourceCacheWithBlock:(QYCleanResourceCacheCompleteBlock)completeBlock;
+
+/**
+ 获取七鱼的日志文件路径
+ *
+ *  @return 日志文件路径
+ */
+- (NSString *)qiyuLogPath;
+
+
+#pragma mark - Deprecated
 
 /**
  *  已废弃，使用setUserInfo替代，设置userInfo.userId即可，userInfo.data忽略

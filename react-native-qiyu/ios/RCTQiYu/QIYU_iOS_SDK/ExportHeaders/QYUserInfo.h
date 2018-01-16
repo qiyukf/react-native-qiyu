@@ -3,7 +3,7 @@
 //  QYSDK
 //
 //  Created by towik on 1/11/16.
-//  Copyright (c) 2016 Netease. All rights reserved.
+//  Copyright (c) 2017 Netease. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

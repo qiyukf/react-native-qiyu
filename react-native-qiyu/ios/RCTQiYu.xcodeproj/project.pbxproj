@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E62D05601E10ED84004AE8BB /* libaacplus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E62D055D1E10ED84004AE8BB /* libaacplus.a */; };
-		E62D05611E10ED84004AE8BB /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E62D055E1E10ED84004AE8BB /* libcrypto.a */; };
-		E62D05621E10ED84004AE8BB /* libevent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E62D055F1E10ED84004AE8BB /* libevent.a */; };
+		E60F01A91E0936D900B9A834 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E60F01A61E0936D900B9A834 /* libcrypto.a */; };
+		E60F01AA1E0936D900B9A834 /* libevent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E60F01A71E0936D900B9A834 /* libevent.a */; };
 		E632A24D1D757FCD001BCAE0 /* RCTQiYu.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E632A24C1D757FCD001BCAE0 /* RCTQiYu.h */; };
 		E632A24F1D757FCD001BCAE0 /* RCTQiYu.m in Sources */ = {isa = PBXBuildFile; fileRef = E632A24E1D757FCD001BCAE0 /* RCTQiYu.m */; };
 		E632A2621D758012001BCAE0 /* libQYSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E632A2601D758012001BCAE0 /* libQYSDK.a */; };
@@ -29,21 +28,23 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E62D055D1E10ED84004AE8BB /* libaacplus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libaacplus.a; sourceTree = "<group>"; };
-		E62D055E1E10ED84004AE8BB /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
-		E62D055F1E10ED84004AE8BB /* libevent.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libevent.a; sourceTree = "<group>"; };
+		B033148E1FDFBC6200381C33 /* QYMessageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYMessageInfo.h; sourceTree = "<group>"; };
+		B033148F1FDFBC6200381C33 /* QYSessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYSessionViewController.h; sourceTree = "<group>"; };
+		B03314901FDFBC6200381C33 /* QYConversationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYConversationManager.h; sourceTree = "<group>"; };
+		B03314911FDFBC6200381C33 /* QYSessionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYSessionInfo.h; sourceTree = "<group>"; };
+		B03314921FDFBC6200381C33 /* QYSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYSource.h; sourceTree = "<group>"; };
+		B03314931FDFBC6200381C33 /* QYPushMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYPushMessage.h; sourceTree = "<group>"; };
+		B03314941FDFBC6200381C33 /* QYCustomActionConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYCustomActionConfig.h; sourceTree = "<group>"; };
+		B03314951FDFBC6200381C33 /* QYCommodityInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYCommodityInfo.h; sourceTree = "<group>"; };
+		B03314961FDFBC6200381C33 /* QYCustomUIConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYCustomUIConfig.h; sourceTree = "<group>"; };
+		B03314971FDFBC6200381C33 /* QYHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYHeaders.h; sourceTree = "<group>"; };
+		B03314981FDFBC6200381C33 /* QYSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYSDK.h; sourceTree = "<group>"; };
+		B03314991FDFBC6200381C33 /* QYUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYUserInfo.h; sourceTree = "<group>"; };
+		E60F01A61E0936D900B9A834 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "../../../../react-native-qiyu/ios/RCTQiYu/QIYU_iOS_SDK/libcrypto.a"; sourceTree = "<group>"; };
+		E60F01A71E0936D900B9A834 /* libevent.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libevent.a; path = "../../../../react-native-qiyu/ios/RCTQiYu/QIYU_iOS_SDK/libevent.a"; sourceTree = "<group>"; };
 		E632A2491D757FCD001BCAE0 /* libRCTQiYu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTQiYu.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E632A24C1D757FCD001BCAE0 /* RCTQiYu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTQiYu.h; sourceTree = "<group>"; };
 		E632A24E1D757FCD001BCAE0 /* RCTQiYu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTQiYu.m; sourceTree = "<group>"; };
-		E632A2571D758012001BCAE0 /* QYCommodityInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYCommodityInfo.h; sourceTree = "<group>"; };
-		E632A2581D758012001BCAE0 /* QYConversationManagerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYConversationManagerProtocol.h; sourceTree = "<group>"; };
-		E632A2591D758012001BCAE0 /* QYCustomActionConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYCustomActionConfig.h; sourceTree = "<group>"; };
-		E632A25A1D758012001BCAE0 /* QYCustomUIConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYCustomUIConfig.h; sourceTree = "<group>"; };
-		E632A25B1D758012001BCAE0 /* QYHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYHeaders.h; sourceTree = "<group>"; };
-		E632A25C1D758012001BCAE0 /* QYSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYSDK.h; sourceTree = "<group>"; };
-		E632A25D1D758012001BCAE0 /* QYSessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYSessionViewController.h; sourceTree = "<group>"; };
-		E632A25E1D758012001BCAE0 /* QYSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYSource.h; sourceTree = "<group>"; };
-		E632A25F1D758012001BCAE0 /* QYUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYUserInfo.h; sourceTree = "<group>"; };
 		E632A2601D758012001BCAE0 /* libQYSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libQYSDK.a; sourceTree = "<group>"; };
 		E632A2611D758012001BCAE0 /* QYResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = QYResource.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,20 +55,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				E632A2621D758012001BCAE0 /* libQYSDK.a in Frameworks */,
-				E62D05601E10ED84004AE8BB /* libaacplus.a in Frameworks */,
-				E62D05621E10ED84004AE8BB /* libevent.a in Frameworks */,
-				E62D05611E10ED84004AE8BB /* libcrypto.a in Frameworks */,
+				E60F01AA1E0936D900B9A834 /* libevent.a in Frameworks */,
+				E60F01A91E0936D900B9A834 /* libcrypto.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B0A1D8EE1FDE8988009C5575 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E632A2401D757FCD001BCAE0 = {
 			isa = PBXGroup;
 			children = (
 				E632A24B1D757FCD001BCAE0 /* RCTQiYu */,
 				E632A24A1D757FCD001BCAE0 /* Products */,
+				B0A1D8EE1FDE8988009C5575 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,9 +102,8 @@
 			children = (
 				E632A2561D758012001BCAE0 /* ExportHeaders */,
 				E632A2601D758012001BCAE0 /* libQYSDK.a */,
-				E62D055D1E10ED84004AE8BB /* libaacplus.a */,
-				E62D055E1E10ED84004AE8BB /* libcrypto.a */,
-				E62D055F1E10ED84004AE8BB /* libevent.a */,
+				E60F01A61E0936D900B9A834 /* libcrypto.a */,
+				E60F01A71E0936D900B9A834 /* libevent.a */,
 				E632A2611D758012001BCAE0 /* QYResource.bundle */,
 			);
 			path = QIYU_iOS_SDK;
@@ -105,15 +112,18 @@
 		E632A2561D758012001BCAE0 /* ExportHeaders */ = {
 			isa = PBXGroup;
 			children = (
-				E632A2571D758012001BCAE0 /* QYCommodityInfo.h */,
-				E632A2581D758012001BCAE0 /* QYConversationManagerProtocol.h */,
-				E632A2591D758012001BCAE0 /* QYCustomActionConfig.h */,
-				E632A25A1D758012001BCAE0 /* QYCustomUIConfig.h */,
-				E632A25B1D758012001BCAE0 /* QYHeaders.h */,
-				E632A25C1D758012001BCAE0 /* QYSDK.h */,
-				E632A25D1D758012001BCAE0 /* QYSessionViewController.h */,
-				E632A25E1D758012001BCAE0 /* QYSource.h */,
-				E632A25F1D758012001BCAE0 /* QYUserInfo.h */,
+				B03314951FDFBC6200381C33 /* QYCommodityInfo.h */,
+				B03314901FDFBC6200381C33 /* QYConversationManager.h */,
+				B03314941FDFBC6200381C33 /* QYCustomActionConfig.h */,
+				B03314961FDFBC6200381C33 /* QYCustomUIConfig.h */,
+				B03314971FDFBC6200381C33 /* QYHeaders.h */,
+				B033148E1FDFBC6200381C33 /* QYMessageInfo.h */,
+				B03314931FDFBC6200381C33 /* QYPushMessage.h */,
+				B03314981FDFBC6200381C33 /* QYSDK.h */,
+				B03314911FDFBC6200381C33 /* QYSessionInfo.h */,
+				B033148F1FDFBC6200381C33 /* QYSessionViewController.h */,
+				B03314921FDFBC6200381C33 /* QYSource.h */,
+				B03314991FDFBC6200381C33 /* QYUserInfo.h */,
 			);
 			path = ExportHeaders;
 			sourceTree = "<group>";
@@ -218,7 +228,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -256,7 +266,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
