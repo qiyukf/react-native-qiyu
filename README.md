@@ -7,10 +7,20 @@
 
 ### 安装与配置
 #### 安装
-通过npm安装模块
+通过 Yarn 安装模块
+
+如果没有安装 Yarn，请先安装 Yarn
+
 ```
-npm install --save react-native-qiyu
+npm install -g yarn
 ```
+
+安装七鱼 SDK
+
+```
+yarn add react-native-qiyu
+```
+
 即把react-native-qiyu导入到工程中的node_modules文件夹中
 
 #### 配置
@@ -26,7 +36,7 @@ rnpm link react-native-qiyu
 ```
 link成功命令行会提示
 ```
-rnpm info Linking react-native-wx ios dependency
+rnpm info Linking react-native-qiyu ios dependency
 ```
 或者你还可以手动配置
 ```
@@ -35,7 +45,7 @@ rnpm info Linking react-native-wx ios dependency
 
 工程配置
 ```
-在工程target的Build Phases->Link Binary with Libraries中加入UIKit.framework、CoreText.framework、MobileCoreService.framework、SystemConfiguration.framework、AVFoundation.framwork、CoreTelephony.framework、CoreMedia.framework、AudioToolbox.framework、libz.tbd、libstdc++.6.0.9.tbd、libsqlite3.0.tbd等依赖库，在Build Phases->Copy Bundle Resources下添加QYResource.bundle资源包。
+在工程target的Build Phases->Link Binary with Libraries中加入UIKit.framework、CoreText.framework、MobileCoreService.framework、SystemConfiguration.framework、AVFoundation.framwork、CoreTelephony.framework、CoreMedia.framework、AudioToolbox.framework、libz.tbd、libstdc++.6.0.9.tbd、libsqlite3.0.tbd、libxml2.tbd、AssetsLibrary.framework等依赖库
 ```
 iOS9传输安全问题
 ```
@@ -120,6 +130,7 @@ public class MainApplication extends Application implements ReactApplication {
 - getUnreadCountCallback
 - setUserInfo
 - logout
+- cleanCache
 
 ### 方法接口描述
 #### * registerAppId
@@ -129,10 +140,10 @@ registerAppId(appKey, appName)
 ```
 
 ##### params
-| 参数名 | 类型 | 默认值 | 描述 |
-| :----- | :----- | :----- | :----- |
-| appKey | 字符串类型 | 无 | 七鱼管理后台的appKey |
-| appName | 字符串类型 | 无 | 七鱼管理后台的App名称 |
+| 参数名     | 类型    | 默认值  | 描述 |
+| :------ | :---- | :--- | :------------ |
+| appKey  | 字符串类型 | 无    | 七鱼管理后台的appKey |
+| appName | 字符串类型 | 无    | 七鱼管理后台的App名称  |
 
 ##### 示例代码
 ```
@@ -155,22 +166,28 @@ openServiceWindow(params)
 ```
 
 ##### params
-| 参数名 | 类型 | 默认值 | 描述 |
-| :----- | :----- | :----- | :----- |
-| source | JSON对象 | 无 | 会话窗口来源 |
-| sourceTitle | 字符串类型 | 无 | 会话窗口来源标题 |
-| sourceUrl | 字符串类型 | 无 | 会话窗口来源URL |
-| sourceCustomInfo | 字符串类型 | 无 | 会话窗口来源自定义消息 |
-| commodityInfo | JSON对象 | 无 | 商品详情信息 |
-| commodityInfoTitle | 字符串类型 | 无 | 商品详情信息展示商品标题，字符数要求小于100 |
-| commodityInfoDesc | 字符串类型 | 无 | 商品详情信息展示商品描述，字符数要求小于300 |
-| pictureUrl | 字符串类型 | 无 | 商品详情信息展示商品图片URL，字符数要求小于1000 |
-| commodityInfoUrl | 字符串类型 | 无 | 商品详情信息展示跳转URL，字符数要求小于1000 |
-| note | 字符串类型 | 无 | 商品详情信息展示备注信息，可以显示价格、订单号等，字符数要求小于100 |
-| show | 布尔类型 | false | 商品详情信息展示发送时是否要在用户端显示，默认不显示 |
-| sessionTitle | 字符串类型 | 无 | 客服会话窗口标题 |
-| staffId | long类型 | 无 | 指定客服id，如果同时指定 staffId 和 groupId，以 staffId 为准，忽略 groupId |
-| groupId | long类型 | 无 | 指定客服分组id，如果同时指定 staffId 和 groupId，以 staffId 为准，忽略 groupId |
+| 参数名                | 类型     | 默认值   | 描述 |
+| :-------------------- | :----- | :---- | :------ |
+| source                | JSON对象   | 无    | 会话窗口来源 |
+| sourceTitle           | 字符串类型 | 无    | 会话窗口来源标题 |
+| sourceUrl             | 字符串类型 | 无    | 会话窗口来源URL |
+| sourceCustomInfo      | 字符串类型 | 无    | 会话窗口来源自定义消息 |
+| commodityInfo         | JSON对象   | 无    | 商品详情信息 |
+| commodityInfoTitle    | 字符串类型 | 无    | 商品详情信息展示商品标题，字符数要求小于100 |
+| commodityInfoDesc     | 字符串类型 | 无    | 商品详情信息展示商品描述，字符数要求小于300 |
+| pictureUrl            | 字符串类型 | 无    | 商品详情信息展示商品图片URL，字符数要求小于1000 |
+| commodityInfoUrl      | 字符串类型 | 无    | 商品详情信息展示跳转URL，字符数要求小于1000 |
+| note                  | 字符串类型 | 无    | 商品详情信息展示备注信息，可以显示价格、订单号等，字符数要求小于100 |
+| show                  | 布尔类型   | false | 商品详情信息展示发送时是否要在用户端显示，默认不显示 |
+| sessionTitle          | 字符串类型 | 无    | 客服会话窗口标题 |
+| staffId               | long类型   | 无    | 指定客服id，如果同时指定 staffId 和 groupId，以 staffId 为准，忽略 groupId |
+| groupId               | long类型   | 无    | 指定客服分组id，如果同时指定 staffId 和 groupId，以 staffId 为准，忽略 groupId |
+| robotId               | long类型   | 无    | 多机器人接入后，可指定机器人id，进入聊天界面时，会直接以此 id 去请求到对应的机器人 |
+| vipLevel              | long类型   | 无    | 设置访客的vip等级 |
+| robotFirst            | 布尔类型   | false | 指定访客分流是否开启机器人，如果开启机器人，则选择客服或者客服分组之后，先进入机器人模式 |
+| faqTemplateId         | long类型   | 无    | 在机器人开启状态下，指定常见问题模版ID，进入聊天界面时，会下发该ID对应的常见问题模版 |
+| showCloseSessionEntry | 布尔类型   | false | 是否在界面显示关闭会话入口 |
+| showQuitQueue         | 布尔类型   | false | 是否在界面显示退出排队入口，以及在退出时显示退出排队提示 |
 
 ##### 示例代码
 ```
@@ -191,7 +208,13 @@ var params = {
     },
     sessionTitle:'网易七鱼',
     groupId:0,
-    staffId:0
+    staffId:0,
+    robotId:0,
+    robotFirst:false,
+    faqTemplateId:0,
+    vipLevel:0,
+    showQuitQueue:true,
+    showCloseSessionEntry:true
 }
 QiYu.openServiceWindow(params);
 ```
@@ -203,26 +226,28 @@ setCustomUIConfig(params)
 ```
 
 ##### params
-| 参数名 | 类型 | 默认值 | 描述 |
-| :----- | :----- | :----- | :----- |
-| sessionTipTextColor | 字符串类型，如'#CC00FF' | 无 | 会话窗口上方提示条中的文本字体颜色 |
-| sessionTipTextFontSize | int类型，如15 | 无 | 会话窗口上方提示条中的文本字体大小 |
-| customMessageTextColor | 字符串类型，如'#CC00FF' | 无 | 访客文本消息字体颜色 |
-| serviceMessageTextColor | 字符串类型，如'#CC00FF' | 无 | 客服文本消息字体颜色 |
-| messageTextFontSize | int类型，如15 | 无 | 消息文本消息字体大小 |
-| tipMessageTextColor | 字符串类型，如'#CC00FF' | 无 | 提示文本消息字体颜色 |
-| tipMessageTextFontSize | int类型，如15 | 无 | 提示文本消息字体大小 |
-| inputTextColor | 字符串类型，如'#CC00FF' | 无 | 输入框文本字体颜色 |
-| inputTextFontSize | int类型，如15 | 无 | 输入框文本字体大小 |
-| sessionBackgroundImage | [\*]字符串类型，传入图片的绝对路径，如'./qiyu/session_bg.png' | 无 | 客服聊天窗口背景图片 |
+
+| 参数名 | 类型 | 默认值  | 描述 |
+| :------------------------ | :-------------- | :--- | :------------ |
+| sessionTipTextColor       | 字符串类型，如'#CC00FF' | 无 | 会话窗口上方提示条中的文本字体颜色 |
+| sessionTipTextFontSize    | int类型，如15 | 无 | 会话窗口上方提示条中的文本字体大小 |
+| customMessageTextColor    | 字符串类型，如'#CC00FF' | 无 | 访客文本消息字体颜色 |
+| serviceMessageTextColor   | 字符串类型，如'#CC00FF' | 无 | 客服文本消息字体颜色 |
+| messageTextFontSize       | int类型，如15 | 无 | 消息文本消息字体大小 |
+| tipMessageTextColor       | 字符串类型，如'#CC00FF' | 无 | 提示文本消息字体颜色 |
+| tipMessageTextFontSize    | int类型，如15 | 无 | 提示文本消息字体大小 |
+| inputTextColor            | 字符串类型，如'#CC00FF' | 无 | 输入框文本字体颜色 |
+| inputTextFontSize         | int类型，如15 | 无 | 输入框文本字体大小 |
+| sessionBackgroundImage    | [\*]字符串类型，传入图片的绝对路径，如'./qiyu/session_bg.png' | 无 | 客服聊天窗口背景图片 |
 | sessionTipBackgroundColor | 字符串类型，如'#CC00FF' | 无 | 会话窗口上方提示条的背景颜色 |
-| customerHeadImage | [\*]字符串类型，传入图片的绝对路径 | 无 | 访客头像 |
-| serviceHeadImage | [\*]字符串类型，传入图片的绝对路径 | 无 | 客服头像 |
-| sessionMessageSpacing | float类型，如3.5 | 无 | 消息竖直方向间距 |
-| showHeadImage | 布尔类型 | true | 是否显示头像 |
-| showAudioEntry | 布尔类型 | true | 是否显示发送语音入口，设置为false，可以修改为隐藏 |
-| showEmoticonEntry | 布尔类型 | true | 是否显示发送表情入口，设置为false，可以修改为隐藏 |
-| autoShowKeyboard | 布尔类型 | true | 进入聊天界面，是文本输入模式的话，会弹出键盘，设置为false，可以修改为不弹出 |
+| customerHeadImage         | [\*]字符串类型，传入图片的绝对路径 | 无 | 访客头像 |
+| serviceHeadImage          | [\*]字符串类型，传入图片的绝对路径 | 无 | 客服头像 |
+| sessionMessageSpacing     | float类型，如3.5 | 无 | 消息竖直方向间距 |
+| showHeadImage             | 布尔类型 | true | 是否显示头像 |
+| showAudioEntry            | 布尔类型 | true | 是否显示发送语音入口，设置为false，可以修改为隐藏 |
+| showEmoticonEntry         | 布尔类型 | true | 是否显示发送表情入口，设置为false，可以修改为隐藏 |
+| autoShowKeyboard          | 布尔类型 | true | 进入聊天界面，是文本输入模式的话，会弹出键盘，设置为false，可以修改为不弹出 |
+
 * **注意**
 为了防止 react-native 在打包时将用于七鱼的图片文件过滤掉，我们需要将用于七鱼的图片文件添加引用，如
 ```
@@ -263,10 +288,10 @@ setUrlClickWithEventName(eventName)
 ```
 
 ##### params
-| 参数名 | 类型 | 默认值 | 描述 |
-| :----- | :----- | :----- | :----- |
-| eventName | 字符串类型 | 无 | 指定一个事件名称，指定DeviceEventEmitter.addListener后会进行事件监听 |
-| e | Event对象 | 无 | 事件回调返回数据，返回'url'字段，为链接地址字符串 |
+| 参数名       | 类型      | 默认值  | 描述 |
+| :-------- | :------ | :--- | :----------- |
+| eventName | 字符串类型   | 无    | 指定一个事件名称，指定DeviceEventEmitter.addListener后会进行事件监听 |
+| e         | Event对象 | 无    | 事件回调返回数据，返回'url'字段，为链接地址字符串 |
 
 ##### 示例代码
 ```
@@ -284,10 +309,10 @@ setUnreadCountWithEventName(eventName)
 ```
 
 ##### params
-| 参数名 | 类型 | 默认值 | 描述 |
-| :----- | :----- | :----- | :----- |
-| eventName | 字符串类型 | 无 | 指定一个事件名称，指定DeviceEventEmitter.addListener后会进行事件监听 |
-| e | Event对象 | 无 | 事件回调返回数据，返回'unreadCount'字段，为未读数字符串 |
+| 参数名       | 类型      | 默认值  | 描述 |
+| :-------- | :------ | :--- | :-------------- |
+| eventName | 字符串类型   | 无    | 指定一个事件名称，指定DeviceEventEmitter.addListener后会进行事件监听 |
+| e         | Event对象 | 无    | 事件回调返回数据，返回'unreadCount'字段，为未读数字符串 |
 
 ##### 示例代码
 ```
@@ -305,9 +330,9 @@ getUnreadCountCallback(callback(unreadCount))
 ```
 
 ##### params
-| 参数名 | 类型 | 默认值 | 描述 |
-| :----- | :----- | :----- | :----- |
-| unreadCount | 字符串类型 | 无 | 返回未读消息数 |
+| 参数名         | 类型    | 默认值  | 描述 |
+| :---------- | :---- | :--- | :------ |
+| unreadCount | 字符串类型 | 无    | 返回未读消息数 |
 
 ##### 示例代码
 ```
@@ -324,10 +349,10 @@ setUserInfo(params)
 ```
 
 ##### params
-| 参数名 | 类型 | 默认值 | 描述 |
-| :----- | :----- | :----- | :----- |
-| userId | 字符串类型 | 无 | 个人账号Id |
-| data | 字符串类型 | 无 | 用户详细信息json |
+| 参数名    | 类型    | 默认值  | 描述 |
+| :----- | :---- | :--- | :--------- |
+| userId | 字符串类型 | 无    | 个人账号Id |
+| data   | 字符串类型 | 无    | 用户详细信息json |
 
 ##### 示例代码
 ```
@@ -349,4 +374,14 @@ logout()
 ```
 import QiYu from 'react-native-qiyu';
 QiYu.logout();
+```
+#### *cleanCache
+清理缓存
+```
+cleanCache()
+```
+##### 示例代码
+```
+import QiYu from 'react-native-qiyu';
+QiYu.cleanCache();
 ```

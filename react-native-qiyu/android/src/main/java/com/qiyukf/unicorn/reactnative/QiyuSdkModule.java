@@ -22,6 +22,7 @@ import com.qiyukf.unicorn.api.Unicorn;
 import com.qiyukf.unicorn.api.UnreadCountChangeListener;
 import com.qiyukf.unicorn.api.YSFOptions;
 import com.qiyukf.unicorn.api.YSFUserInfo;
+import com.qiyukf.unicorn.api.lifecycle.SessionLifeCycleOptions;
 
 import javax.annotation.Nullable;
 
@@ -37,6 +38,7 @@ public class QiyuSdkModule extends ReactContextBaseJavaModule {
         super(reactContext);
         sContext = reactContext;
         init(appKey, appName);
+        //Diagnosis.setDevServer(1);
     }
 
     @Override
@@ -84,18 +86,31 @@ public class QiyuSdkModule extends ReactContextBaseJavaModule {
                     .setUrl(commodityInfoUrl)
                     .setNote(note)
                     .setShow(show ? 1 : 0)
-                    .create();
+                    .build();
         }
 
         String sessionTitle = RNUtils.optString(params, "sessionTitle");
         long groupId = RNUtils.optInt(params, "groupId");
         long staffId = RNUtils.optInt(params, "staffId");
+        long robotId = RNUtils.optInt(params, "robotId");
+        boolean robotFirst = RNUtils.optBoolean(params, "robotFirst", false);
+        long faqTemplateId = RNUtils.optInt(params, "faqTemplateId");
+        int vipLevel = RNUtils.optInt(params, "vipLevel");
+        boolean showQuitQueue = RNUtils.optBoolean(params, "showQuitQueue", false);
+        boolean showCloseSessionEntry = RNUtils.optBoolean(params, "showCloseSessionEntry", false);
 
         // 启动聊天界面
         ConsultSource source = new ConsultSource(sourceUrl, sourceTitle, sourceCustomInfo);
         source.productDetail = productDetail;
         source.groupId = groupId;
         source.staffId = staffId;
+        source.robotId = robotId;
+        source.robotFirst = robotFirst;
+        source.faqGroupId = faqTemplateId;
+        source.vipLevel = vipLevel;
+        source.sessionLifeCycleOptions = new SessionLifeCycleOptions();
+        source.sessionLifeCycleOptions.setCanQuitQueue(showQuitQueue);
+        source.sessionLifeCycleOptions.setCanCloseSession(showCloseSessionEntry);
         Unicorn.openServiceActivity(sContext, sessionTitle, source);
     }
 
@@ -196,6 +211,11 @@ public class QiyuSdkModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void logout() {
         Unicorn.setUserInfo(null);
+    }
+
+    @ReactMethod
+    public void cleanCache() {
+        Unicorn.clearCache();
     }
 
     private static class MessageClickListener implements OnMessageItemClickListener {

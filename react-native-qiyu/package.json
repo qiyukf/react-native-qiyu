@@ -1,6 +1,6 @@
 {
   "name": "react-native-qiyu",
-  "version": "2.8.1",
+  "version": "3.12.0",
   "description": "react-native netease qiyu sdk",
   "main": "index.js",
   "keywords": [

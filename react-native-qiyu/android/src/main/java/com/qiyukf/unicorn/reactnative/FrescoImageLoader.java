@@ -1,5 +1,6 @@
 package com.qiyukf.unicorn.reactnative;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -23,6 +24,7 @@ import com.qiyukf.unicorn.api.UnicornImageLoader;
 /**
  * Created by hzwangchenyan on 2016/4/1.
  */
+@SuppressLint("StaticFieldLeak")
 public class FrescoImageLoader implements UnicornImageLoader {
     private Context context;
 
@@ -41,14 +43,17 @@ public class FrescoImageLoader implements UnicornImageLoader {
                 builder.setResizeOptions(new ResizeOptions(width, height));
             }
             ImageRequest imageRequest = builder.build();
-            DataSource<CloseableReference<CloseableImage>> dataSource = imagePipeline.fetchImageFromBitmapCache(imageRequest, context);
-            CloseableReference<CloseableImage> imageReference = null;
+            DataSource<CloseableReference<CloseableImage>> dataSource =
+                    imagePipeline.fetchImageFromBitmapCache(imageRequest, context);
+            CloseableReference<CloseableImage> imageReference = dataSource.getResult();
             try {
-                imageReference = dataSource.getResult();
                 if (imageReference != null) {
                     CloseableImage closeableImage = imageReference.get();
                     if (closeableImage != null && closeableImage instanceof CloseableBitmap) {
-                        resultBitmap = (((CloseableBitmap) closeableImage).getUnderlyingBitmap()).copy(Bitmap.Config.RGB_565, false);
+                        Bitmap underlyingBitmap = ((CloseableBitmap) closeableImage).getUnderlyingBitmap();
+                        if (underlyingBitmap != null && !underlyingBitmap.isRecycled()) {
+                            resultBitmap = underlyingBitmap.copy(Bitmap.Config.RGB_565, false);
+                        }
                     }
                 }
             } finally {
@@ -70,71 +75,41 @@ public class FrescoImageLoader implements UnicornImageLoader {
         ImagePipeline imagePipeline = Fresco.getImagePipeline();
         DataSource<CloseableReference<CloseableImage>> dataSource = imagePipeline.fetchDecodedImage(imageRequest, context);
 
-        dataSource.subscribe(new BaseBitmapDataSubscriber() {
-                                 @Override
-                                 public void onNewResultImpl(@Nullable Bitmap bitmap) {
-                                     if (listener != null && bitmap != null) {
-                                         BitmapCopyAsyncTask bitmapCopyAsyncTask = new BitmapCopyAsyncTask(bitmap);
-                                         bitmapCopyAsyncTask.setOnDataFinishedListener(new OnDataFinishedListener() {
-                                             @Override
-                                             public void onSucceed(Object data) {
-                                                 listener.onLoadComplete((Bitmap) data);
-                                             }
+        BaseBitmapDataSubscriber subscriber = new BaseBitmapDataSubscriber() {
+            @Override
+            public void onNewResultImpl(@Nullable Bitmap bitmap) {
+                if (listener != null) {
+                    new AsyncTask<Bitmap, Void, Bitmap>() {
+                        @Override
+                        protected Bitmap doInBackground(Bitmap... params) {
+                            Bitmap bitmap = params[0];
+                            Bitmap result = null;
+                            if (bitmap != null && !bitmap.isRecycled()) {
+                                result = bitmap.copy(Bitmap.Config.RGB_565, false);
+                            }
+                            return result;
+                        }
 
-                                             @Override
-                                             public void onFailed() {
-                                                 listener.onLoadFailed(null);
-                                             }
-                                         });
-                                         bitmapCopyAsyncTask.execute();
-                                     }
-                                 }
-
-                                 @Override
-                                 public void onFailureImpl(DataSource dataSource) {
-                                     if (listener != null) {
-                                         listener.onLoadFailed(dataSource.getFailureCause());
-                                     }
-                                 }
-                             },
-                UiThreadImmediateExecutorService.getInstance());
-    }
-
-    private class BitmapCopyAsyncTask extends AsyncTask<Void, Void, Bitmap> {
-        private Bitmap originBitmap;
-        private OnDataFinishedListener onDataFinishedListener;
-
-        public BitmapCopyAsyncTask(Bitmap originBitmap) {
-            this.originBitmap = originBitmap;
-        }
-
-        @Override
-        protected Bitmap doInBackground(Void... params) {
-            Bitmap resultBitmap = null;
-            if (originBitmap != null) {
-                resultBitmap = originBitmap.copy(Bitmap.Config.RGB_565, false);
+                        @Override
+                        protected void onPostExecute(Bitmap bitmap) {
+                            if (bitmap != null) {
+                                listener.onLoadComplete(bitmap);
+                            } else {
+                                listener.onLoadFailed(null);
+                            }
+                        }
+                    }.execute(bitmap);
+                }
             }
-            return resultBitmap;
-        }
 
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            if (bitmap != null) {
-                onDataFinishedListener.onSucceed(bitmap);
-            } else {
-                onDataFinishedListener.onFailed();
+            @Override
+            public void onFailureImpl(DataSource dataSource) {
+                if (listener != null) {
+                    listener.onLoadFailed(dataSource.getFailureCause());
+                }
             }
-        }
+        };
 
-        public void setOnDataFinishedListener(OnDataFinishedListener onDataFinishedListener) {
-            this.onDataFinishedListener = onDataFinishedListener;
-        }
-    }
-
-    public interface OnDataFinishedListener {
-        void onSucceed(Object data);
-
-        void onFailed();
+        dataSource.subscribe(subscriber, UiThreadImmediateExecutorService.getInstance());
     }
 }

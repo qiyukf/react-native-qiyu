@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "react": "15.3.1",
-    "react-native": "0.32.0",
-    "react-native-qiyu": "^2.8.2"
+    "react-native": "^0.52.0",
+    "react-native-qiyu": "^3.12.0"
   }
 }
