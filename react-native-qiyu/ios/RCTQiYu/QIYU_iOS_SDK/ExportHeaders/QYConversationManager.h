@@ -11,13 +11,13 @@
 @class QYMessageInfo;
 @class QYSessionInfo;
 
-
 /**
  *  会话委托
  */
 @protocol QYConversationManagerDelegate <NSObject>
 
 @optional
+
 /**
  *  会话未读数变化
  *
@@ -28,17 +28,18 @@
 /**
  *  会话列表变化；非平台电商用户，只有一个会话项，平台电商用户，有多个会话项
  */
-- (void)onSessionListChanged:(NSArray<QYSessionInfo*> *)sessionList;
+- (void)onSessionListChanged:(NSArray<QYSessionInfo *> *)sessionList;
 
 /**
- *  收到消息
+ *  接收消息
  */
 - (void)onReceiveMessage:(QYMessageInfo *)message;
 
 @end
 
+
 /**
- *  会话管理类
+ *  会话管理类：QYConversationManager
  */
 @interface QYConversationManager : NSObject
     
@@ -60,7 +61,7 @@
  *
  *  @return 包含SessionInfo的数组
  */
-- (NSArray<QYSessionInfo*> *)getSessionList;
+- (NSArray<QYSessionInfo *> *)getSessionList;
 
 /**
  *  设置会话委托

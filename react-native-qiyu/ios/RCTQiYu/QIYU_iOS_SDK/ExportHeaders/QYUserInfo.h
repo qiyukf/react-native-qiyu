@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 /**
  *  个人信息
  */
@@ -17,11 +16,11 @@
 /**
  *  个人账号Id
  */
-@property (nonatomic,copy)      NSString    *userId;
+@property (nonatomic, copy) NSString *userId;
 
 /**
- *  用户详细信息json
+ *  用户详细信息json数据
  */
-@property (nonatomic,copy)      NSString    *data;
+@property (nonatomic, copy) NSString *data;
 
 @end
