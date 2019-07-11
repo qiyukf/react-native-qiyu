@@ -15,6 +15,7 @@ typedef NS_ENUM(NSInteger, QYMessageType) {
     QYMessageTypeText,      //文本
     QYMessageTypeImage,     //图片
     QYMessageTypeAudio,     //语音
+    QYMessageTypeVideo,     //视频
     QYMessageTypeCustom     //自定义
 };
 
@@ -37,6 +38,5 @@ typedef NS_ENUM(NSInteger, QYMessageType) {
  *  消息时间
  */
 @property (nonatomic, assign) NSTimeInterval timeStamp;
-
 
 @end

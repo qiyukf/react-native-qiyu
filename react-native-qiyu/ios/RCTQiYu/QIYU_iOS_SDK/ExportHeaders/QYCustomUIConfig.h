@@ -7,17 +7,48 @@
 //
 
 /**
- *  自定义UI配置类；如果想要替换图片素材，可以自己创建一个QYCustomResource.bundle，在其中放置跟QYResource.bundle中同名的图片素材，即可实现替换。
- *  SDK会优先使用QYCustomResource.bundle中的图片素材，当QYCustomResource.bundle中没有的时候，才会使用QYResource.bundle中的图片素材
+ *  工具栏自定义配置项：QYCustomInputItem
  */
+
+/**
+ *  输入框下方“更多”配置项点击回调
+ */
+typedef void (^QYCustomInputItemBlock)();
+
+/**
+ *  输入框下方“完全自定义”配置项
+ */
+@interface QYCustomInputItem : NSObject
+
+@property (nonatomic, strong) UIImage *normalImage;
+@property (nonatomic, strong) UIImage *selectedImage;
+@property (nonatomic, copy) NSString *text;
+@property (nonatomic, copy) QYCustomInputItemBlock block;
+
+@end
+
+
+/**
+ *  自定义UI配置类：QYCustomUIConfig，单例模式
+ *  如果想要替换图片素材，可以自己创建一个QYCustomResource.bundle，在其中放置与QYResource.bundle同名的图片素材，即可实现替换。
+ *  SDK会优先使用QYCustomResource.bundle中的图片素材，若QYCustomResource.bundle中没有，才会使用QYResource.bundle中的图片素材。
+ */
+
+/**
+ *  访客分流展示模式
+ */
+typedef NS_ENUM(NSInteger, QYBypassDisplayMode) {
+    QYBypassDisplayModeNone,
+    QYBypassDisplayModeCenter,
+    QYBypassDisplayModeBottom
+};
+
 @interface QYCustomUIConfig : NSObject
 
 + (instancetype)sharedInstance;
 
 /**
- *  恢复成默认设置
- *
- *  @return void
+ *  恢复默认设置
  */
 - (void)restoreToDefault;
 
@@ -104,6 +135,11 @@
 @property (nonatomic, copy) NSString *serviceHeadImageUrl;
 
 /**
+ *  人工按钮文案
+ */
+@property (nonatomic, copy) NSString *humanButtonText;
+
+/**
  *  访客消息气泡normal图片
  */
 @property (nonatomic, strong) UIImage *customerMessageBubbleNormalImage;
@@ -137,6 +173,11 @@
  *  消息竖直方向间距
  */
 @property (nonatomic, assign) CGFloat sessionMessageSpacing;
+
+/**
+ *  头像与消息气泡间距，默认为5pt
+ */
+@property (nonatomic, assign) CGFloat headMessageSpacing;
 
 /**
  *  是否显示头像
@@ -179,11 +220,50 @@
 @property (nonatomic, assign) CGFloat bottomMargin;
 
 /**
- *  是否显示关闭会话入口
+ *  默认是NO,默认隐藏关闭会话入口，设置为YES，可以修改为显示
  */
 @property (nonatomic, assign) BOOL showCloseSessionEntry;
 
-@property (nonatomic, assign) BOOL showTransWords;
+/**
+ *  访客分流展示模式
+ */
+@property (nonatomic, assign) QYBypassDisplayMode bypassDisplayMode;
+
+/**
+ *  以下配置项在V4.4.0版本前，只有平台电商版本有；V4.4.0以后，平台电商/非平台电商均有这些配置项
+ *  聊天窗口右上角按钮（对于平台电商来说，这里可以考虑放“商铺入口”）显示，默认不显示
+ */
+@property (nonatomic, assign)   BOOL showShopEntrance;
+
+/**
+ *  聊天窗口右上角按钮（对于平台电商来说，这里可以考虑放“商铺入口”）icon
+ */
+@property (nonatomic, strong) UIImage *shopEntranceImage;
+
+/**
+ *  聊天窗口右上角按钮（对于平台电商来说，这里可以考虑放“商铺入口”）文本
+ */
+@property (nonatomic, copy) NSString *shopEntranceText;
+
+/**
+ *  聊天内容区域的按钮（对于平台电商来说，这里可以考虑放置“会话列表入口“）显示，默认不显示
+ */
+@property (nonatomic, assign) BOOL showSessionListEntrance;
+
+/**
+ *  聊天内容区域的按钮（对于平台电商来说，这里可以考虑放置“会话列表入口“）在聊天页面的位置，YES代表在右上角，NO代表在左上角，默认在右上角
+ */
+@property (nonatomic, assign) BOOL sessionListEntrancePosition;
+
+/**
+ *  会话列表入口icon
+ */
+@property (nonatomic, strong) UIImage *sessionListEntranceImage;
+
+/**
+ *  输入框下方“完全自定义”配置项
+ */
+@property (nonatomic, strong) NSArray<QYCustomInputItem *> *customInputItems;
 
 @end
 

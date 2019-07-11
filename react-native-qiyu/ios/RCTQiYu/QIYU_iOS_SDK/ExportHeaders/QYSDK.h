@@ -2,7 +2,7 @@
 //  QYSDK.h
 //  QYSDK
 //
-//  version 3.12.0
+//  version 4.9.0
 //
 //  Created by towik on 12/21/15.
 //  Copyright (c) 2017 Netease. All rights reserved.
@@ -14,25 +14,26 @@
 /**
  *  完成回调
  */
-typedef void(^QYCompletionBlock)();
+typedef void(^QYCompletionBlock)(BOOL success);
 
 /**
- *  完成回调
+ *  完成结果回调
  */
 typedef void(^QYCompletionWithResultBlock)(BOOL isSuccess);
 
 /**
  *  推送消息回调
  */
-typedef void(^QYPushMessageBlock)(QYPushMessage *);
+typedef void(^QYPushMessageBlock)(QYPushMessage *pushMessage);
 
 /**
  *  清理文件缓存回调
  */
 typedef void(^QYCleanResourceCacheCompleteBlock)(NSError *error);
 
+
 /**
- *  所有SDK接口都从此类获得
+ *  QYSDK：单例模式，所有SDK接口都从此类获得
  */
 @interface QYSDK : NSObject
 
@@ -46,13 +47,14 @@ typedef void(^QYCleanResourceCacheCompleteBlock)(NSError *error);
 /**
  *  注册SDK
  *
- *  @param appKey  appKey 对应管理后台分配的appkey
- *  @param appName appName(就是SDK 1.0.0版本的cerName,参数名变了) 对应管理后台添加一个app时填写的App名称
+ *  @param appKey  对应管理后台分配的appkey
+ *  @param appName  对应管理后台添加一个App时填写的App名称 (就是SDK1.0.0版本的cerName,参数名变动)
  */
 - (void)registerAppId:(NSString *)appKey appName:(NSString *)appName;
 
 /**
- *  返回客服聊天ViewController，必须嵌入到UINavigationController中，全局只能有一个sessionViewController实例
+ *  返回客服聊天ViewController，必须嵌入至UINavigationController中
+ *  须保证全局只有一个sessionViewController实例，退出后能够正确释放实例
  *
  *  @return 会话ViewController
  */
@@ -102,7 +104,6 @@ typedef void(^QYCleanResourceCacheCompleteBlock)(NSError *error);
 
 /**
  *  设置authToken
- *
  */
 - (void)setAuthToken:(NSString *)authToken;
 
@@ -136,21 +137,27 @@ typedef void(^QYCleanResourceCacheCompleteBlock)(NSError *error);
 - (NSString *)appKey;
 
 /**
- *  追踪用户浏览信息;暂时客服端还没有入口可以查看这部分信息
- *
- *  @param urlString  浏览url
- *  @param attributes 附加信息
- */
-- (void)trackHistory:(NSString *)urlString withAttributes:(NSDictionary *)attributes;
-
-/**
- 清理接收文件缓存
- @param completeBlock 清理缓存完成block
+ *  清理接收文件缓存
+ *  @param completeBlock 清理缓存完成block
  */
 - (void)cleanResourceCacheWithBlock:(QYCleanResourceCacheCompleteBlock)completeBlock;
 
 /**
- 获取七鱼的日志文件路径
+ *  访问轨迹
+ *  @param title 标题
+ *  @param enterOrOut 进入还是退出
+ */
+- (void)trackHistory:(NSString *)title enterOrOut:(BOOL)enterOrOut key:(NSString *)key;
+
+/**
+ *  行为轨迹
+ *  @param title 标题
+ *  @param description 具体信息，以key-value表示信息对，例如key为“商品价格”，value为“999”
+ */
+- (void)trackHistory:(NSString *)title description:(NSDictionary *)description key:(NSString *)key;
+
+/**
+ *  获取七鱼日志文件路径
  *
  *  @return 日志文件路径
  */
@@ -158,13 +165,21 @@ typedef void(^QYCleanResourceCacheCompleteBlock)(NSError *error);
 
 
 #pragma mark - Deprecated
+///**
+// *  已废弃
+// *  追踪用户浏览信息;暂时客服端还没有入口可以查看这部分信息
+// *  @param urlString  浏览url
+// *  @param attributes 附加信息
+// */
+//- (void)trackHistory:(NSString *)urlString withAttributes:(NSDictionary *)attributes;
 
-/**
- *  已废弃，使用setUserInfo替代，设置userInfo.userId即可，userInfo.data忽略
- *  添加个人信息
- *
- *  @param infos 个人信息；目前有两个key，“foreignid”表示用户id，“name”表示用户名
- */
+///**
+// *  已废弃，使用setUserInfo替代
+// *  设置userInfo.userId即可，userInfo.data忽略
+// *  添加个人信息
+// *
+// *  @param infos 个人信息；目前有两个key，“foreignid”表示用户id，“name”表示用户名
+// */
 //- (void)addUserInfo:(NSDictionary *)infos;
 
 @end
